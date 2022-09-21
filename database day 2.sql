@@ -50,7 +50,7 @@ DELETE FROM customers WHERE c_id=4;
 
 SELECT c_id, c_name FROM customers;
 SELECT * FROM customers;
-INSERT INTO customers(c_name, c_email, c_phone_no, c_postcode, over_18) values("efwef", "ggg@EEE.com", "66666666666", "GGGGGGGGGG", "0");
+
 
 DESCRIBE items;
 UPDATE customers set c_name="DIANA" WHERE c_id=4;
@@ -69,4 +69,26 @@ item_name VARCHAR(20),
 price DECIMAL(6,2),
 PRIMARY KEY (item_id));
 
-SELECT * FROM customers;
+SELECT * FROM items;
+
+CREATE TABLE orders(
+order_id INT UNIQUE NOT NULL AUTO_INCREMENT,
+cust_id INT NOT NULL,
+total_price DECIMAL(6,2),
+PRIMARY KEY(order_id),
+FOREIGN KEY (cust_id) REFERENCES customers(c_id));
+
+SELECT * FROM orders;
+DESCRIBE orders;
+CREATE TABLE order_items(
+oi_id INT UNIQUE NOT NULL AUTO_INCREMENT,
+ord_id INT NOT NULL,
+i_id INT NOT NULL,
+quantity INT,
+PRIMARY KEY (oi_id),
+FOREIGN KEY(ord_id) REFERENCES orders(order_id),
+FOREIGN KEY(i_id) REFERENCES items(item_id));
+
+SHOW tables;
+ALTER TABLE orders ADD order_date DATETIME NOT NULL;
+INSERT INTO items(item_name, price, i_description) VALUES("food5", "50.00", "sdaFTGDYR");
