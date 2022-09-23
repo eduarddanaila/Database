@@ -35,4 +35,36 @@ select count(id) from city join country on city.countrycode=country.code where c
 
 #8.	Using IS NOT NULL, ORDER BY, and LIMIT, which country has the lowest population? Discard non-zero populations.
 
-select name, population from country where population is not null and population >0 order by population asc;
+select name, population from country where population is not null and population >0 order by population asc limit 1;
+
+#9.	Using aggregate functions, return the number of countries the database contains.
+
+select count(name) from country;
+
+#10.	What are the top ten largest countries by area?
+
+select name from country order by surfacearea DESC limit 10;
+
+#11.	List the five largest cities by population in Japan.
+
+ select city.name from city join country on country.code=city.countrycode where country.name="Japan" order by country.population desc limit 5;
+ 
+ #12.	List the names and country codes of every country with Elizabeth II as its Head of State. You will need to fix the mistake first!
+ update country set headofstate="elizabeth II" where headofstate="elisabeth II";
+ select name, code from country where headofstate="elisabeth II";
+ 
+ #13.	List the top ten countries with the smallest population-to-area ratio. Discard any countries with a ratio of 0.
+ 
+ select name, population, surfacearea from country where population>=1 order by population/surfacearea asc limit 10;
+ 
+ #14.	List every unique world language.
+ 
+ select distinct language from countrylanguage;
+ 
+ #15.	List the names and GNP of the world's top 10 richest countries.
+ 
+ select name, GNP from country order by GNP DESC limit 10;
+ 
+ #16.	List the names of, and number of languages spoken by, the top ten most multilingual countries
+ 
+ 
