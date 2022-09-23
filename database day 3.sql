@@ -67,4 +67,4 @@ select name from country order by surfacearea DESC limit 10;
  
  #16.	List the names of, and number of languages spoken by, the top ten most multilingual countries
  
- 
+ select c.name, count(cl.language) from country c join countrylanguage cl on c.code=cl.countrycode group by c.name order by count(cl.language) desc limit 10;
